@@ -94,8 +94,10 @@ while cap.isOpened():
                         matchesMask = [int(x) for x in mask.ravel()]
                         
                         # 매칭 성공시 성공 문구 표시
-                        cv2.putText(img2, "matching success!", (30, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 3)
-
+                        cv2.putText(img2, "matching success!", (30, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 3) # 성공 시 빨간색
+                        # 매칭 실패시 실패 문구
+                    else: # else문 (성공 아닐 시)
+                        cv2.putText(img2, "matching failure", (30, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (255, 0, 0), 3) # 실패 시 파란색 
                         # 결과 시각화 
                         # 원본 영상 좌표로 원근 변환 후 영역 표시
                         h, w = img1.shape[:2]
