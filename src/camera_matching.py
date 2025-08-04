@@ -92,7 +92,8 @@ while cap.isOpened():
                     if mask.sum() > MIN_MATCH:  # 정상치 매칭점 최소 갯수 이상인 경우
                         # 마스크를 리스트로 변환 (정수형으로)
                         matchesMask = [int(x) for x in mask.ravel()]
-
+                        
+                        # 매칭 성공시 성공 문구 표시
                         cv2.putText(img2, "matching success!", (30, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 3)
 
                         # 결과 시각화 
