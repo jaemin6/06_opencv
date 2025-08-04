@@ -93,6 +93,8 @@ while cap.isOpened():
                         # 마스크를 리스트로 변환 (정수형으로)
                         matchesMask = [int(x) for x in mask.ravel()]
 
+                        cv2.putText(img2, "matching success!", (30, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 3)
+
                         # 결과 시각화 
                         # 원본 영상 좌표로 원근 변환 후 영역 표시
                         h, w = img1.shape[:2]
