@@ -7,7 +7,7 @@
 6. esc 누르면 종료
 """
 
-import cv2
+import cv2, time
 import numpy as np
 import glob
 
