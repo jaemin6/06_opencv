@@ -48,6 +48,30 @@ while True:
             # 폴더에서 book0.jpg ~ book72.jpg 모두 불러오기 (파일명 순서대로)
             img_paths = sorted(glob.glob("../img/book*.jpg"))
 
+            start_time = time.time()  # 검색 시작 시간 기록
+
+            for path in img_paths:
+                db_img = cv2.imread(path)
+                kp2, des2 = orb.detectAndCompute(db_img, None)
+                if des1 is None or des2 is None:
+                    continue
+
+                matches = bf.match(des1, des2)
+                matches = sorted(matches, key=lambda x: x.distance)
+                good_matches = [m for m in matches if m.distance < 50]
+
+                if len(good_matches) > best_match_count:
+                    best_match_count = len(good_matches)
+                    best_match_path = path
+
+            end_time = time.time()  # 검색 종료 시간 기록
+            elapsed_time = end_time - start_time  # 걸린 시간 계산
+            print(f"검색 시간: {elapsed_time:.2f}초")
+
+            if best_match_path:
+                best_img = cv2.imread(best_match_path)
+                cv2.imshow("Best Match", best_img)
+                print(f"Best match: {best_match_path} with {best_match_count} good matches")
             for path in img_paths:
                 db_img = cv2.imread(path)            # 데이터베이스 이미지 읽기
                 kp2, des2 = orb.detectAndCompute(db_img, None)  # 데이터베이스 이미지 특징점 추출
